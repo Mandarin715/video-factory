@@ -108,7 +108,11 @@ class FFmpegComposer:
 
                 if transition and transition.type != TransitionType.CUT:
                     out_label = f"xfade{xfade_idx}"
-                    t_filter = get_transition_filter(transition, current, next_label, out_label)
+                    prev_dur = timeline[i - 1].duration
+                    t_filter = get_transition_filter(
+                        transition, current, next_label, out_label,
+                        prev_duration_sec=prev_dur
+                    )
                     if t_filter:
                         filter_parts.append(t_filter)
                         current = out_label

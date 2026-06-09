@@ -30,7 +30,7 @@ def get_effect_filter_chain(effect: Effect, input_label: str, output_label: str,
         return f"[{input_label}]hue=s=0[{output_label}]"
 
     elif etype == EffectType.VIGNETTE:
-        return f"[{input_label}]vignette=PI/4:max_eval=0[{output_label}]"
+        return f"[{input_label}]vignette=PI/4[{output_label}]"
 
     return f"[{input_label}]copy[{output_label}]"
 
