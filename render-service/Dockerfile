@@ -6,10 +6,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
-COPY requirements.txt .
+# Copy and install shared library first
+COPY shared/ /tmp/shared/
+RUN pip install --no-cache-dir /tmp/shared/ && rm -rf /tmp/shared
+
+COPY render-service/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY render-service/ .
 
 RUN mkdir -p /fonts
 

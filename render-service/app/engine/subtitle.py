@@ -1,4 +1,5 @@
 """drawtext subtitle filter builder."""
+import os
 from video_factory_shared.models import Subtitle, SubtitlePosition
 
 
@@ -29,7 +30,15 @@ def build_subtitle_filter(sub: Subtitle, width: int, height: int,
                           font_dir: str = "/fonts") -> str:
     """Build a single drawtext filter string for one subtitle entry."""
     font_name = sub.font
-    font_path = f"{font_dir}/{font_name.replace(' ', '')}.otf"
+    font_base = font_name.replace(" ", "")
+    # Try common font extensions
+    for ext in [".otf", ".ttf", ".ttc"]:
+        candidate = f"{font_dir}/{font_base}{ext}"
+        if os.path.exists(candidate):
+            font_path = candidate
+            break
+    else:
+        font_path = f"{font_dir}/{font_base}.otf"  # fallback
 
     start_sec = sub.start_ms / 1000.0
     end_sec = sub.end_ms / 1000.0

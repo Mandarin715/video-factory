@@ -111,6 +111,7 @@ def run_analysis_pipeline(self, job_id: str, video_url: str):
     except Exception as e:
         logger.exception(f"[{job_id}] Pipeline failed")
         _fail_job(job_id, str(e))
+        return {"job_id": job_id, "status": "error", "error": str(e)}
     finally:
         storage.cleanup_temp(temp_dir)
 

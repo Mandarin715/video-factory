@@ -3,4 +3,3 @@ uvicorn[standard]>=0.27
 celery[redis]>=5.3
 redis>=5.0
 python-multipart>=0.0.9
-video-factory-shared @ file:///shared

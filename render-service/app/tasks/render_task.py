@@ -102,5 +102,6 @@ def run_render_pipeline(self, job_id: str, project_id: str,
             "job_id": job_id, "status": "error", "progress": 0,
             "current_step": "error", "result_url": None, "error": str(e),
         })
+        return {"job_id": job_id, "status": "error", "error": str(e)}
 
     return {"job_id": job_id, "status": "done"}

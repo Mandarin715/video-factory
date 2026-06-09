@@ -15,8 +15,8 @@ services:
 
   analysis-api:
     build:
-      context: ./analysis-service
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: analysis-service/Dockerfile
     ports:
       - "8001:8001"
     env_file:
@@ -32,8 +32,8 @@ services:
 
   analysis-worker:
     build:
-      context: ./analysis-service
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: analysis-service/Dockerfile
     env_file:
       - .env
     volumes:
@@ -47,8 +47,8 @@ services:
 
   render-api:
     build:
-      context: ./render-service
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: render-service/Dockerfile
     ports:
       - "8002:8002"
     env_file:
@@ -64,8 +64,8 @@ services:
 
   render-worker:
     build:
-      context: ./render-service
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: render-service/Dockerfile
     env_file:
       - .env
     volumes:

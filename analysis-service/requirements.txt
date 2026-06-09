@@ -7,6 +7,6 @@ librosa>=0.10
 soundfile>=0.12
 numpy>=1.26
 google-generativeai>=0.8
+pillow>=10.0
 tenacity>=8.2
 python-multipart>=0.0.9
-video-factory-shared @ file:///shared

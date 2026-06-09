@@ -69,7 +69,6 @@ class FFmpegComposer:
 
         for i, (label, clip) in enumerate(input_labels):
             current_label = f"{label}v"
-            speed_filter = ""
             if clip.speed != 1.0:
                 filter_parts.append(
                     f"[{i}:v]trim={clip.src_start}:{clip.src_end},setpts=PTS-STARTPTS,"

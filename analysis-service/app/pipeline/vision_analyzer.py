@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Optional
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 import google.generativeai as genai
-from app.config import GEMINI_API_KEY, GEMINI_MODEL, VISION_TIMEOUT_SEC
+from app.config import GEMINI_API_KEY, GEMINI_MODEL, VISION_TIMEOUT_SEC, VISION_MAX_RETRIES
 
 logger = logging.getLogger(__name__)
 
@@ -33,7 +33,7 @@ Characters: describe each visible person concisely in Chinese, empty array if no
         self.model = genai.GenerativeModel(GEMINI_MODEL)
 
     @retry(
-        stop=stop_after_attempt(3),
+        stop=stop_after_attempt(VISION_MAX_RETRIES),
         wait=wait_exponential(multiplier=2, min=2, max=8),
         retry=retry_if_exception_type((Exception,)),
     )
