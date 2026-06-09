@@ -1,0 +1,105 @@
+{
+  "timeline": [
+    {
+      "clip_id": "c1",
+      "material_id": "v001",
+      "src_start": 0.0,
+      "src_end": 5.0,
+      "duration": 5.0,
+      "transition_in": {
+        "type": "fade_black",
+        "duration_ms": 500
+      },
+      "transition_out": {
+        "type": "crossfade",
+        "duration_ms": 800
+      },
+      "effects": [
+        {
+          "type": "zoom_in",
+          "params": {"start_scale": 1.0, "end_scale": 1.15}
+        }
+      ],
+      "volume": 0.8,
+      "speed": 1.0
+    },
+    {
+      "clip_id": "c2",
+      "material_id": "v001",
+      "src_start": 5.0,
+      "src_end": 10.0,
+      "duration": 5.0,
+      "transition_in": null,
+      "transition_out": {
+        "type": "wipe_left",
+        "duration_ms": 600
+      },
+      "effects": [
+        {
+          "type": "grayscale",
+          "params": {}
+        }
+      ],
+      "volume": 0.8,
+      "speed": 1.0
+    },
+    {
+      "clip_id": "c3",
+      "material_id": "v001",
+      "src_start": 10.0,
+      "src_end": 15.0,
+      "duration": 5.0,
+      "transition_in": null,
+      "transition_out": {
+        "type": "fade_black",
+        "duration_ms": 500
+      },
+      "effects": [
+        {
+          "type": "vignette",
+          "params": {}
+        }
+      ],
+      "volume": 0.8,
+      "speed": 1.0
+    }
+  ],
+  "subtitles": [
+    {
+      "text": "Hello World - Scene 1",
+      "start_ms": 1000,
+      "end_ms": 4500,
+      "font": "Noto Sans CJK SC",
+      "font_size": 48,
+      "position": "bottom_center",
+      "color": "white",
+      "outline_color": "black",
+      "outline_width": 2
+    },
+    {
+      "text": "Scene 2 - Wipe Transition",
+      "start_ms": 5500,
+      "end_ms": 9500,
+      "font": "Noto Sans CJK SC",
+      "font_size": 48,
+      "position": "bottom_center",
+      "color": "white",
+      "outline_color": "black",
+      "outline_width": 2
+    }
+  ],
+  "bgm": {
+    "material_id": "bgm001",
+    "volume": 0.3,
+    "fade_in_ms": 2000,
+    "fade_out_ms": 3000,
+    "loop": true
+  },
+  "output": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "video_bitrate": "8M",
+    "audio_bitrate": "192k"
+  }
+}

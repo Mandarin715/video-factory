@@ -1,0 +1,84 @@
+version: "3.8"
+
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  analysis-api:
+    build:
+      context: ./analysis-service
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    env_file:
+      - .env
+    volumes:
+      - data_videos:/data/videos
+      - data_output:/data/output
+      - data_temp:/data/temp
+    depends_on:
+      redis:
+        condition: service_healthy
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8001
+
+  analysis-worker:
+    build:
+      context: ./analysis-service
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    volumes:
+      - data_videos:/data/videos
+      - data_output:/data/output
+      - data_temp:/data/temp
+    depends_on:
+      redis:
+        condition: service_healthy
+    command: celery -A celery_app worker --loglevel=info --concurrency=2
+
+  render-api:
+    build:
+      context: ./render-service
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8002"
+    env_file:
+      - .env
+    volumes:
+      - data_videos:/data/videos
+      - data_output:/data/output
+      - data_temp:/data/temp
+    depends_on:
+      redis:
+        condition: service_healthy
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8002
+
+  render-worker:
+    build:
+      context: ./render-service
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    volumes:
+      - data_videos:/data/videos
+      - data_output:/data/output
+      - data_temp:/data/temp
+    depends_on:
+      redis:
+        condition: service_healthy
+    command: celery -A celery_app worker --loglevel=info --concurrency=1
+
+volumes:
+  redis_data:
+  data_videos:
+  data_output:
+  data_temp:
