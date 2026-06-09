@@ -1,0 +1,11 @@
+.env
+__pycache__/
+*.pyc
+.superpowers/
+data/
+*.egg-info/
+*.egg
+dist/
+build/
+.vscode/
+.idea/
